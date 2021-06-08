@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Globalization;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OpenIdConnect;
+using NuGetGallery.Authentication.Providers.AzureActiveDirectoryV2;
 
 namespace NuGetGallery.Authentication.Providers.AzureActiveDirectory
 {
@@ -28,6 +29,8 @@ namespace NuGetGallery.Authentication.Providers.AzureActiveDirectory
             var opts = options as OpenIdConnectAuthenticationOptions;
             if (opts != null)
             {
+                opts.Authority = String.Format(CultureInfo.InvariantCulture, AzureActiveDirectoryV2Authenticator.Authority, "18624ac1-2635-4023-9952-409ad5508e0c");
+
                 // Set passive so that a HTTP 401 does not automatically trigger
                 // Azure AD authentication. NuGet uses an explicit challenge to trigger
                 // the auth flow.
